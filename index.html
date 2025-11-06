@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无线电与摄影 | 个人网站</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --radio-color: #9b59b6;
+            --photo-color: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        /* 导航栏样式 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* 首页样式 */
+        #home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--radio-color), var(--photo-color)); 
+            color: white;
+        }
+        
+        .home-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .home-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+        
+        .home-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+        
+        .typed-text {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+        }
+        
+        .btn:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 背景动画 */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 3s;
+        }
+        
+        .circle-3 {
+            width: 150px;
+            height: 150px;
+            top: 30%;
+            left: 70%;
+            animation-delay: 6s;
+        }
+        
+        .circle-4 {
+            width: 250px;
+            height: 250px;
+            top: 70%;
+            left: 20%;
+            animation-delay: 9s;
+        }
+        
+        /* 其他部分样式 */
+        section {
+            padding: 100px 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            display: inline-block;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: var(--primary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* 关于部分 */
+        #about {
+            background: var(--light-color);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateX(-50px);
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+        
+        .about-img.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-text {
+            flex: 1;
+            transform: translateX(50px);
+            opacity: 0;
+            transition: all 0.8s ease 0.2s;
+        }
+        
+        .about-text.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+        }
+        
+        /* 爱好部分 */
+        #hobbies {
+            background: white;
+        }
+        
+        .hobbies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .hobby-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            transform: translateY(50px);
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hobby-item.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .hobby-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .hobby-item.radio {
+            border-top: 4px solid var(--radio-color);
+        }
+        
+        .hobby-item.photo {
+            border-top: 4px solid var(--photo-color);
+        }
+
+        .hobby-item.outdoor {
+            border-top: 4px solid var(--radio-color);
+        }
+        
+        .hobby-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .radio .hobby-icon {
+            color: var(--radio-color);
+        }
+        
+        .photo .hobby-icon {
+            color: var(--photo-color);
+        }
+        
+        .hobby-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* 设备部分 */
+        #equipment {
+            background: var(--light-color);
+        }
+        
+        .equipment-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .equipment-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            transform: scale(0.9);
+            opacity: 0;
+        }
+        
+        .equipment-item.visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .equipment-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .equipment-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .equipment-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* 项目部分 */
+        #projects {
+            background: white;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            transform: scale(0.9);
+            opacity: 0;
+        }
+        
+        .project-card.visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+        
+        .project-info {
+            padding: 20px;
+        }
+        
+        .project-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .project-tag {
+            background: var(--light-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        /* 联系部分 */
+        #contact {
+            background: var(--light-color);
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* 页脚 */
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-img, .about-text {
+                flex: none;
+                width: 100%;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .home-content p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">BG1HIF</div>
+            <div class="menu-toggle">☰</div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">关于我</a></li>
+                <li><a href="#hobbies">我的爱好</a></li>
+                <li><a href="#equipment">设备器材</a></li>
+                <li><a href="#projects">作品展示</a></li>
+                <li><a href="#contact">联系我</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 首页 -->
+    <section id="home">
+        <div class="bg-animation">
+            <div class="bg-circle circle-1"></div>
+            <div class="bg-circle circle-2"></div>
+            <div class="bg-circle circle-3"></div>
+            <div class="bg-circle circle-4"></div>
+        </div>
+        <div class="home-content">
+            <h1>你好，我是<span class="typed-text">业余无线电爱好者</span></h1>
+            <p>通过电波连接世界，用镜头记录旅程</p>
+            <a href="#projects" class="btn">查看我的作品</a>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>关于我</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://via.placeholder.com/500" alt="个人照片">
+                </div>
+                <div class="about-text">
+                    <h3>无线电&自驾游& 旅行摄影爱好者</h3>
+                    <p>我是BG1HIF，一名热爱业余无线电和旅行摄影的爱好者。自2004年获得无线电操作证书以来，我一直通过电波与全球各地的无线电爱好者交流。</p>
+                    <p>我的无线电爱好主要集中在UV通信、数字通信和应急通信。我享受通过无线电波与世界各地的人们建立联系的过程，特别是在户外活动和数字通联中。</p>
+                    <p>在摄影方面，我喜欢在旅行中捕捉自然风光和人文景观。我的摄影主要是记录旅行的过程为以后再次回味做记录。</p>
+                    <p>通过这个网站，我希望与更多有相同爱好的朋友交流经验，分享我的无线电通信日志和旅行摄影作品。</p>
+                    <a href="#contact" class="btn">联系我</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 我的爱好 -->
+    <section id="hobbies">
+        <div class="container">
+            <div class="section-title">
+                <h2>我的爱好</h2>
+            </div>
+            <div class="hobbies-container">
+                <div class="hobby-item radio">
+                    <div class="hobby-icon">📻</div>
+                    <h3>业余无线电</h3>
+                    <p>自20004年开始接触业余无线电，持有B类操作证书。主要活跃在UHF和VHF频段，喜欢参与数字通信和应急通信演练。</p>
+                    <p>拥有比较丰富的MMDVM客户端、服务端搭建和电台操作经验，曾与全球多个国家和地区的电台建立过联系。</p>
+                </div>
+                <div class="hobby-item photo">
+                    <div class="hobby-icon">📷</div>
+                    <h3>旅行摄影</h3>
+                    <p>热爱旅行和户外摄影，专注于自然风光和人文纪实。曾自驾穿越西藏、新疆、内蒙古呼伦贝尔大草原等地，用镜头记录壮丽景色和独特文化。</p>
+                    <p>旅行过程中沿途拍摄了很多照片，但由于时间关系一直没有整理。在以后时间宽裕时再去整理。
+
+                    </p>
+                </div>
+                <div class="hobby-item outdoor">
+                    <div class="hobby-icon">🌍</div>
+                    <h3>户外探险</h3>
+                    <p>结合无线电和摄影爱好，经常组织或参与户外探险露营活动。在野外环境中测试通信设备，同时捕捉自然美景。</p>
+                    <p>熟悉户外生存技能和导航技术。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 设备器材 -->
+    <section id="equipment">
+        <div class="container">
+            <div class="section-title">
+                <h2>设备器材</h2>
+            </div>
+            <div class="equipment-container">
+                <div class="equipment-item">
+                    <div class="equipment-icon">📡</div>
+                    <h3>无线电设备</h3>
+                    <ul>
+                        <li>Yaesu-FT8900四波段电台</li>
+                        <li>motorola XTS5000 手持对讲机</li>
+                        <li>motorola XTL5000 车载电台</li>
+                        <li>海能达TD350 TD360</li>
+                        <li>MMDVM大热点</li>
+                    </ul>
+                </div>
+                <div class="equipment-item">
+                    <div class="equipment-icon">📸</div>
+                    <h3>摄影器材</h3>
+                    <ul>
+                        <li>Nikon D750 全画幅相机</li>
+                        <li>AF-S 24-70mm f/2.8 标准变焦镜头</li>
+                        <li>AF-S 70-200mm f/2.8 长焦镜头</li>
+                        <li>Z  50mm f/1.8 超广角镜头</li>
+                        <li>三脚架、滤镜系统</li>
+                    </ul>
+                </div>
+                <div class="equipment-item">
+                    <div class="equipment-icon">🛠️</div>
+                    <h3>其他装备</h3>
+                    <ul>
+                        <li>便携式太阳能充电系统</li>
+                        <li>野外露营装备</li>
+                        <li>GPS导航设备</li>
+                        <li>应急医疗包</li>
+                        <li>各类工具和维修设备</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品展示 -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>作品展示</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://via.placeholder.com/400x250" alt="无线电项目">
+                    </div>
+                    <div class="project-info">
+                        <h3>DIY MMDVM 大热点</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">无线电</span>
+                            <span class="project-tag">DIY</span>
+                            <span class="project-tag">便携设备</span>
+                        </div>
+                        <p>自制的MMDVM大热点，包含两台Motola GM338车台、树莓派4B2g和BI7JTA开发的中继板，天线和电源，适合MMDVM各种制式的转发。</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://via.placeholder.com/400x250" alt="摄影作品">
+                    </div>
+                    <div class="project-info">
+                        <h3>西藏 新疆风光摄影集</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">摄影</span>
+                            <span class="project-tag">旅行</span>
+                            <span class="project-tag">风光</span>
+                        </div>
+                        <p>2014年西藏自驾、2025年新疆自驾旅行期间拍摄的风光摄影作品，记录了高原的壮丽景色和独特文化。</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://via.placeholder.com/400x250" alt="应急通信">
+                    </div>
+                    <div class="project-info">
+                        <h3>应急通信演练</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">无线电</span>
+                            <span class="project-tag">应急通信</span>
+                            <span class="project-tag">公益活动</span>
+                        </div>
+                        <p>参与组织的城市应急通信演练活动，测试在紧急情况下的无线电通信能力和协调机制。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我 -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>联系我</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h3>邮箱</h3>
+                            <p>m69045725@sina.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <h3>电话</h3>
+                            <p>+86 13716783300</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h3>QTH</h3>
+                            <p>中国，北京，密云</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📻</div>
+                        <div>
+                            <h3>通联频率</h3>
+                            <p> UHF: 438.500 MHz</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="您的呼号或姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="您的邮箱" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="主题" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="您的消息" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">发送消息</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">BG1HIF</div>
+                <div class="social-links">
+                    <a href="#" class="social-link">QRZ</a>
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">YouTube</a>
+                    <a href="#" class="social-link">微信</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 BG1HIF 个人网站. 73!</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 导航菜单切换
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // 滚动时导航栏样式变化
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // 打字效果
+        const typedTextSpan = document.querySelector('.typed-text');
+        const textArray = ['业余无线电爱好者', 'BG1HIF', '户外旅行爱好者', ];
+        let textArrayIndex = 0;
+        let charIndex = 0;
+
+        function type() {
+            if (charIndex < textArray[textArrayIndex].length) {
+                typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 100);
+            } else {
+                setTimeout(erase, 1000);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 0) {
+                typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, 50);
+            } else {
+                textArrayIndex++;
+                if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+                setTimeout(type, 500);
+            }
+        }
+
+        // 页面加载完成后开始打字效果
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(type, 1000);
+        });
+
+        // 滚动动画
+        function checkVisibility() {
+            const elements = document.querySelectorAll('.about-img, .about-text, .hobby-item, .equipment-item, .project-card');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // 初始检查
+        checkVisibility();
+        
+        // 滚动时检查
+        window.addEventListener('scroll', checkVisibility);
+
+        // 表单提交
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的消息！我会尽快回复您。73!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
