@@ -882,18 +882,23 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form id="contactForm">
+                   <!--提交反馈信息-->
+                    <form 
+                        id="contactForm"
+                          action="https://formspree.io/f/xldqkrzl"
+                           method="POST" >
+                        
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="您的呼号或姓名" required>
+                            <input type="text" name="name" class="form-control" placeholder="您的呼号或姓名" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="您的邮箱" required>
+                            <input type="email" name="email" class="form-control" placeholder="您的邮箱" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="主题" required>
+                            <input type="text" name="subject" class="form-control" placeholder="主题" required>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" placeholder="您的消息" required></textarea>
+                            <textarea name="message" class="form-control" placeholder="您的消息" required></textarea>
                         </div>
                         <button type="submit" class="btn">发送消息</button>
                     </form>
@@ -1001,6 +1006,7 @@
 </body>
 
 </html>
+
 
 
 
