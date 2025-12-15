@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西藏摄影作品集 | BG1HIF</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 0;
+            color: #333;
+        }
+
+        /* 相册布局 */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.03);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        /* 前后按钮 */
+        .nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 50px;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+            padding: 10px;
+        }
+
+        .prev { left: 30px; }
+        .next { right: 30px; }
+    </style>
+</head>
+
+<body>
+
+<h1>西藏摄影作品集</h1>
+
+<div class="gallery">
+        <img src="D:\Myweb\personal-site\IMG_7815.jpg" alt="风光照片">
+        <img src="D:\Myweb\personal-site\IMG_7818.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_7833.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_7864.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_7882.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_7889.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_7891.jpg" alt="风光照片">
+        <img src="D:\Myweb\personal-site\IMG_7818.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_7899.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_7911.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_7932.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_8007.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_8018.jpg" alt="风光照片">
+        <img src="D:\Myweb\personal-site\IMG_8049.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_8071.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_7864.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_8107.jpg" alt="">
+        <img src="D:\Myweb\personal-site\IMG_8117.jpg" alt="">
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <span class="nav prev" id="prev">&#10094;</span>
+    <img id="lightbox-img">
+    <span class="nav next" id="next">&#10095;</span>
+</div>
+
+<script>
+    const images = document.querySelectorAll(".gallery img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+        if (index < 0) index = images.length - 1;
+        if (index >= images.length) index = 0;
+        currentIndex = index;
+        lightboxImg.src = images[currentIndex].src;
+    }
+
+    images.forEach((img, index) => {
+        img.addEventListener("click", () => {
+            lightbox.style.display = "flex";
+            showImage(index);
+        });
+    });
+
+    prevBtn.addEventListener("click", e => {
+        e.stopPropagation();
+        showImage(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener("click", e => {
+        e.stopPropagation();
+        showImage(currentIndex + 1);
+    });
+
+    // 键盘支持
+    document.addEventListener("keydown", e => {
+        if (lightbox.style.display === "flex") {
+            if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+            if (e.key === "ArrowRight") showImage(currentIndex + 1);
+            if (e.key === "Escape") lightbox.style.display = "none";
+        }
+    });
+
+    // 点击背景关闭
+    lightbox.addEventListener("click", () => {
+        lightbox.style.display = "none";
+    });
+</script>
+
+</body>
+</html>
